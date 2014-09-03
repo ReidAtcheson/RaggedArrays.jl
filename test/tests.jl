@@ -1,14 +1,14 @@
-module TestNonuniformArray
+module TestRaggedArrays
 
 using FactCheck
-using NonuniformArray
+using RaggedArrays 
 
 Adata = [1.0,2.0,
          3.0,4.0,5.0,
          6.0,
          7.0,8.0,9.0,10.0];
 Aoffs = [0,2,5,6,10];
-A = NArray(Adata,Aoffs);
+A = RaggedArray(Adata,Aoffs);
 
 
 facts("Testing index getters") do
@@ -51,7 +51,7 @@ end
 
 
 facts("Testing sizes array constructor") do
-    B=NArray(Float64,[2,3,1,4]);
+    B=RaggedArray(Float64,[2,3,1,4]);
     @fact B.offs=>A.offs
 end
 
