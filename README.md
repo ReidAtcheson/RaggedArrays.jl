@@ -1,4 +1,4 @@
-NonuniformArray.jl
+RaggedArrays.jl
 -----------
 This library handles the case of "array of arrays" where each subarray may have different lengths - but enforces
 contiguity of data for ease of passing to outside linear algebra packages.
@@ -11,7 +11,7 @@ Usage
     sizes = [5,6,3,8,10,2];
 
     #Allocate uninitialized nonuniform array "NArray"
-    A = NArray(Float64,sizes);
+    A = RArray(Float64,sizes);
 
     #Set 2nd value in 3rd subarray
     A[2,3] = 1.0;
@@ -23,12 +23,14 @@ Usage
 		#Get 3rd subarray as indexable object:
     Asub = getsubarray(A,3);
 
-		#But if we want to operate on NArrays using e.g. BLAS we can, because all data is contiguous.
-		B = NArray(Float64,sizes);
-		AdotB = dot(A.data,B.data);
+    #But if we want to operate on NArrays using e.g. BLAS we can, because all data is contiguous.
+    B = NArray(Float64,sizes);
+    AdotB = dot(A.data,B.data);
 
-    #This is useful if you have a complicated indexing of an array from say an adaptive
-    #finite element computation, but at a high level want to pass these arrays to a black-box Krylov solver.
+    #This is useful if you have a complicated indexing 
+    #of an array from say an adaptive
+    #finite element computation, but at a high level 
+    #want to pass these arrays to a black-box Krylov solver.
     
     
 
