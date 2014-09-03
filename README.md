@@ -3,15 +3,20 @@ RaggedArrays.jl
 This library handles the case of "array of arrays" where each subarray may have different lengths - but enforces
 contiguity of data for ease of passing to outside linear algebra packages.
 
+There is not yet a versioned release of this package, so
+use Pkg.clone("RaggedArrays"), rather than Pkg.add("RaggedArrays") 
+to retrieve a local copy.
 
 Usage
 ======
 
+    using RaggedArrays;
+
     #Create array of subarray sizes
     sizes = [5,6,3,8,10,2];
 
-    #Allocate uninitialized nonuniform array "NArray"
-    A = RArray(Float64,sizes);
+    #Allocate uninitialized RaggedArray.
+    A = RaggedArray(Float64,sizes);
 
     #Set 2nd value in 3rd subarray
     A[2,3] = 1.0;
@@ -36,6 +41,11 @@ Usage
 
 
 
+Contributing
+=======
+
+I welcome any contributions to make RaggedArrays a better
+and more widely useful package. 
 
 
 
