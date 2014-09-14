@@ -12,7 +12,42 @@ type RaggedArray{T}
 end
 
 
-function RaggedArray(T::Type,sizes::Array{Int64})
+
+#Create initialized RaggedArray from regular array.
+function RaggedArray{T}(A::Array{T,2})
+    (m,n) = size(A);
+    sizes = Array(Int64,(n,));
+    sizes[:] = m;
+    out = RaggedArray(T,sizes);
+    out.data=copy(A[:]);
+
+    return out;
+end
+
+#Create RaggedArray from Array{Array{T}}.
+#Note: This will transpose indices, so that A[i][j] = ragged_A[j][i].
+function RaggedArray{T}(A::Array{Array{T}})
+    n = length(A);
+    sizes = Array(Int64,(n,));
+    for i = 1 : n
+        sizes[i] = length(A[i]);
+    end
+
+    ragged_A = RaggedArray(T,sizes);
+    for i = 1 : n
+        J = length(A[i]);
+        for j = 1 : J
+            ragged_A[j][i] = A[i][j];
+        end
+    end
+
+
+    return ragged_A;
+end
+
+#Create uninitialized RaggedArray of subarrays with sizes given in 
+#"sizes" array.
+function RaggedArray(T::Type,sizes::Array{Int64,1})
     totallen = sum(sizes);
     J = length(sizes);
     

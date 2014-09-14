@@ -57,6 +57,23 @@ facts("Testing sizes array constructor") do
 end
 
 
+facts("Testing regular array constructor") do
+    nrows = 53;
+    ncols = 101;
+    A = rand(nrows,ncols);
+    B = RaggedArray(A);
+    b::Bool = true;
+    for r = 1 : nrows
+        for c = 1 : ncols
+            b = b && (A[r,c]==B[r,c]);
+        end
+    end
+
+
+    @fact b => true;
+end
+
+
 end
 
 
