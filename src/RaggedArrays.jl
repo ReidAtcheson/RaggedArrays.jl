@@ -26,7 +26,7 @@ end
 
 #Create RaggedArray from Array{Array{T}}.
 #Note: This will transpose indices, so that A[i][j] = ragged_A[j][i].
-function RaggedArray{T}(A::Array{Array{T}})
+function RaggedArray{T}(A::Array{Array{T},1})
     n = length(A);
     sizes = Array(Int64,(n,));
     for i = 1 : n
