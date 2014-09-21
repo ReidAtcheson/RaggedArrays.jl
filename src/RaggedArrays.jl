@@ -1,6 +1,9 @@
 module RaggedArrays
 
-export RaggedArray, getindex, setindex!, getsubarraysize, getsubarray, length, size
+export RaggedArray , getindex, setindex!, getsubarraysize, getsubarray, length, size
+
+import Base.length
+import Base.size
 
 type RaggedArray{T} 
     data::Array{T,1};
