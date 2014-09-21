@@ -1,6 +1,6 @@
 module RaggedArrays
 
-export RaggedArray, getindex, setindex!, getsubarraysize, getsubarray
+export RaggedArray, getindex, setindex!, getsubarraysize, getsubarray, length, size
 
 type RaggedArray{T} 
     data::Array{T,1};
@@ -65,6 +65,24 @@ function RaggedArray(T::Type,sizes::Array{Int64,1})
 
     return RaggedArray(data,offs);
 end
+
+#Return number of columns.
+function length{T}(A::RaggedArray{T})
+    return length(A.offs)-1;
+end
+
+#Return (sizes,ncols) where sizes is array of column lengths.
+function size{T}(A::RaggedArray{T})
+    #Compute sizes array.
+    n = length(A);
+    sizes = Array(Int64,(n,));
+    for i = 1 : n
+        sizes[i] = getsubarraysize(A,i);
+    end
+
+    return (sizes,n);
+end
+
 #Convenience 2D array getter notation.
 function getindex{T}(A::RaggedArray{T},i::Int64,j::Int64)
     check2dbounds(A,i,j);

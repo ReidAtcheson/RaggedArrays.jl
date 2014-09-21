@@ -11,6 +11,15 @@ Adata = [1.0,2.0,
 Aoffs = [0,2,5,6,10];
 A = RaggedArray(Adata,Aoffs);
 
+facts("Testing length(A)") do
+    @fact length(A) => 4;
+end
+
+facts("Testing size(A)") do
+    (sizes,n) = size(A);
+    @fact n => 4;
+    @fact sizes => [2,3,1,4];
+end
 
 facts("Testing index getters") do
     @fact A[2,1] => 2.0
