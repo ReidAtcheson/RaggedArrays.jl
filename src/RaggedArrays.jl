@@ -40,7 +40,7 @@ function RaggedArray{T}(A::Array{Array{T},1})
     for i = 1 : n
         J = length(A[i]);
         for j = 1 : J
-            ragged_A[j][i] = A[i][j];
+            ragged_A[j,i] = A[i][j];
         end
     end
 
