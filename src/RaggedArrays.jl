@@ -4,6 +4,7 @@ export RaggedArray , getindex, setindex!, getsubarraysize, getsubarray, length, 
 
 import Base.length
 import Base.size
+import Base.print
 
 type RaggedArray{T} 
     data::Array{T,1};
