@@ -100,6 +100,18 @@ function setindex!{T}(A::RaggedArray{T},val::T,i::Int64,j::Int64)
     A.data[A.offs[j]+i]=val;
 end
 
+function print{T}(A::RaggedArray{T})
+    (ms,n) = size(A);
+    for i = 1 : n
+        print("[");
+        for j = 1 : ms[i]
+            print(A[j,i]);print(" ");
+        end
+        print("\n");
+    end
+    print("]");
+end
+
 
 #Get j-th subarray
 function getsubarray{T}(A::RaggedArray{T},j::Int64)
