@@ -1,6 +1,6 @@
 module RaggedArrays
 
-export RaggedArray , getindex, setindex!, getsubarraysize, getsubarray, length, size
+export RaggedArray , getindex, setindex!, getsubarraysize, getsubarray, length, size, print
 
 import Base.length
 import Base.size
