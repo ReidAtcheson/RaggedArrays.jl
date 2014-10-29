@@ -1,10 +1,11 @@
 module RaggedArrays
 
-export RaggedArray , getindex, setindex!, getsubarraysize, getsubarray, length, size, print
+export RaggedArray , getindex, setindex!, getsubarraysize, getsubarray, length, size, print, copy
 
 import Base.length
 import Base.size
 import Base.print
+import Base.copy
 
 type RaggedArray{T} 
     data::Array{T,1};
@@ -126,6 +127,11 @@ function getsubarraysize{T}(A::RaggedArray{T},j::Int64)
     return (A.offs[j+1]-A.offs[j]);
 end
 
+function copy{T}(A::RaggedArray{T})
+    data=copy(A.data);
+    offs=copy(A.offs);
+    return RaggedArray(data,offs);
+end
 
 function check1dbounds{T}(A::RaggedArray{T},j::Int64)
     if(j==length(A.offs))
